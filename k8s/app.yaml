@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: credit-app
+data:
+  PHX_HOST: "credit-app.example.com"
+  PHX_SERVER: "true"
+  PORT: "4000"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+  namespace: credit-app
+type: Opaque
+stringData:
+  DATABASE_URL: "ecto://credit_app:change_me_in_production@postgres:5432/credit_app_prod"
+  SECRET_KEY_BASE: "generate_with_mix_phx_gen_secret_in_production"
+  GUARDIAN_SECRET_KEY: "generate_a_secure_key_for_production"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-app-web
+  namespace: credit-app
+  labels:
+    app: credit-app
+    component: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: credit-app
+      component: web
+  template:
+    metadata:
+      labels:
+        app: credit-app
+        component: web
+    spec:
+      containers:
+        - name: credit-app
+          image: credit-app:latest
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secret
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          readinessProbe:
+            httpGet:
+              path: /api/auth/login
+              port: 4000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/auth/login
+              port: 4000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: credit-app-web
+  namespace: credit-app
+spec:
+  selector:
+    app: credit-app
+    component: web
+  ports:
+    - port: 80
+      targetPort: 4000
+  type: ClusterIP

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-app-worker
+  namespace: credit-app
+  labels:
+    app: credit-app
+    component: worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: credit-app
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: credit-app
+        component: worker
+    spec:
+      containers:
+        - name: credit-app-worker
+          image: credit-app:latest
+          command: ["bin/credit_app", "start"]
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secret
+          env:
+            - name: PHX_SERVER
+              value: "false"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"

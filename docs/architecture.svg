@@ -1,0 +1,321 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, -apple-system, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="webGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#EEF2FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E7FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="contextGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FDF4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DCFCE7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="infraGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF7ED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFEDD5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FDF2F8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FCE7F3;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+    <filter id="shadowSm" x="-1%" y="-1%" width="102%" height="106%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" rx="12" fill="#F8FAFC"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1200" height="64" rx="12" fill="url(#headerGrad)"/>
+  <rect x="0" y="24" width="1200" height="40" fill="url(#headerGrad)"/>
+  <text x="600" y="40" text-anchor="middle" fill="white" font-size="22" font-weight="700" letter-spacing="0.5">CreditApp - System Architecture</text>
+  <text x="600" y="57" text-anchor="middle" fill="#C7D2FE" font-size="11" font-weight="400">Multi-Country Credit Application Platform | Elixir + Phoenix + PostgreSQL</text>
+
+  <!-- ═══════════════ CLIENTS LAYER ═══════════════ -->
+  <rect x="30" y="82" width="1140" height="80" rx="10" fill="url(#webGrad)" stroke="#A5B4FC" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="100" fill="#4338CA" font-size="11" font-weight="700" letter-spacing="1">CLIENTS</text>
+
+  <!-- Browser -->
+  <rect x="60" y="110" width="160" height="38" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="96" y="126" fill="#312E81" font-size="10" font-weight="600">Browser</text>
+  <text x="96" y="140" fill="#6366F1" font-size="9">Phoenix LiveView</text>
+  <rect x="66" y="116" width="22" height="22" rx="4" fill="#EEF2FF"/>
+  <text x="77" y="131" text-anchor="middle" fill="#4F46E5" font-size="13">&#x1F310;</text>
+
+  <!-- REST Client -->
+  <rect x="250" y="110" width="160" height="38" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="286" y="126" fill="#312E81" font-size="10" font-weight="600">REST API Client</text>
+  <text x="286" y="140" fill="#6366F1" font-size="9">JWT Bearer Token</text>
+  <rect x="256" y="116" width="22" height="22" rx="4" fill="#EEF2FF"/>
+  <text x="267" y="131" text-anchor="middle" fill="#4F46E5" font-size="13">&#x1F4F1;</text>
+
+  <!-- Webhook Sender -->
+  <rect x="440" y="110" width="160" height="38" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="476" y="126" fill="#312E81" font-size="10" font-weight="600">Webhook Sender</text>
+  <text x="476" y="140" fill="#6366F1" font-size="9">External Services</text>
+  <rect x="446" y="116" width="22" height="22" rx="4" fill="#EEF2FF"/>
+  <text x="457" y="131" text-anchor="middle" fill="#4F46E5" font-size="13">&#x1F517;</text>
+
+  <!-- ═══════════════ WEB LAYER ═══════════════ -->
+  <rect x="30" y="178" width="1140" height="120" rx="10" fill="url(#webGrad)" stroke="#A5B4FC" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="198" fill="#4338CA" font-size="11" font-weight="700" letter-spacing="1">PHOENIX WEB LAYER</text>
+
+  <!-- Router -->
+  <rect x="60" y="208" width="120" height="74" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="120" y="230" text-anchor="middle" fill="#312E81" font-size="11" font-weight="700">Router</text>
+  <text x="120" y="246" text-anchor="middle" fill="#6366F1" font-size="8.5">/api/*</text>
+  <text x="120" y="258" text-anchor="middle" fill="#6366F1" font-size="8.5">/applications/*</text>
+  <text x="120" y="270" text-anchor="middle" fill="#6366F1" font-size="8.5">/api/webhooks/*</text>
+
+  <!-- Auth Pipeline -->
+  <rect x="200" y="208" width="130" height="74" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="265" y="230" text-anchor="middle" fill="#312E81" font-size="11" font-weight="700">Auth Pipeline</text>
+  <text x="265" y="246" text-anchor="middle" fill="#6366F1" font-size="8.5">Guardian JWT</text>
+  <text x="265" y="258" text-anchor="middle" fill="#6366F1" font-size="8.5">VerifyHeader</text>
+  <text x="265" y="270" text-anchor="middle" fill="#6366F1" font-size="8.5">EnsureAuthenticated</text>
+
+  <!-- Controllers -->
+  <rect x="350" y="208" width="160" height="74" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="430" y="230" text-anchor="middle" fill="#312E81" font-size="11" font-weight="700">API Controllers</text>
+  <text x="430" y="246" text-anchor="middle" fill="#6366F1" font-size="8.5">AuthController</text>
+  <text x="430" y="258" text-anchor="middle" fill="#6366F1" font-size="8.5">CreditApplicationController</text>
+  <text x="430" y="270" text-anchor="middle" fill="#6366F1" font-size="8.5">WebhookController</text>
+
+  <!-- LiveView -->
+  <rect x="530" y="208" width="170" height="74" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="615" y="230" text-anchor="middle" fill="#312E81" font-size="11" font-weight="700">LiveView Pages</text>
+  <text x="615" y="246" text-anchor="middle" fill="#6366F1" font-size="8.5">Index (list + filters)</text>
+  <text x="615" y="258" text-anchor="middle" fill="#6366F1" font-size="8.5">New (create form)</text>
+  <text x="615" y="270" text-anchor="middle" fill="#6366F1" font-size="8.5">Show (detail + actions)</text>
+
+  <!-- PubSub -->
+  <rect x="720" y="208" width="130" height="74" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="785" y="230" text-anchor="middle" fill="#92400E" font-size="11" font-weight="700">Phoenix PubSub</text>
+  <text x="785" y="248" text-anchor="middle" fill="#B45309" font-size="8.5">applications:{country}</text>
+  <text x="785" y="260" text-anchor="middle" fill="#B45309" font-size="8.5">application:{id}</text>
+  <text x="785" y="272" text-anchor="middle" fill="#B45309" font-size="8.5">Real-time broadcasts</text>
+
+  <!-- Cachex -->
+  <rect x="870" y="208" width="130" height="74" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="935" y="230" text-anchor="middle" fill="#92400E" font-size="11" font-weight="700">Cachex (ETS)</text>
+  <text x="935" y="248" text-anchor="middle" fill="#B45309" font-size="8.5">application:{id}</text>
+  <text x="935" y="260" text-anchor="middle" fill="#B45309" font-size="8.5">TTL: 5 min</text>
+  <text x="935" y="272" text-anchor="middle" fill="#B45309" font-size="8.5">Write-through invalidation</text>
+
+  <!-- CORS -->
+  <rect x="1020" y="208" width="130" height="74" rx="8" fill="white" stroke="#818CF8" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="1085" y="230" text-anchor="middle" fill="#312E81" font-size="11" font-weight="700">Middleware</text>
+  <text x="1085" y="248" text-anchor="middle" fill="#6366F1" font-size="8.5">CORSPlug</text>
+  <text x="1085" y="260" text-anchor="middle" fill="#6366F1" font-size="8.5">FallbackController</text>
+  <text x="1085" y="272" text-anchor="middle" fill="#6366F1" font-size="8.5">PII Masking</text>
+
+  <!-- ═══════════════ BUSINESS LOGIC LAYER ═══════════════ -->
+  <rect x="30" y="314" width="740" height="120" rx="10" fill="url(#contextGrad)" stroke="#86EFAC" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="334" fill="#166534" font-size="11" font-weight="700" letter-spacing="1">BUSINESS LOGIC (CONTEXTS)</text>
+
+  <!-- Applications Context -->
+  <rect x="60" y="344" width="165" height="74" rx="8" fill="white" stroke="#4ADE80" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="142" y="366" text-anchor="middle" fill="#14532D" font-size="11" font-weight="700">Applications</text>
+  <text x="142" y="382" text-anchor="middle" fill="#16A34A" font-size="8.5">create_application/1</text>
+  <text x="142" y="394" text-anchor="middle" fill="#16A34A" font-size="8.5">update_status/3</text>
+  <text x="142" y="406" text-anchor="middle" fill="#16A34A" font-size="8.5">Ecto.Multi transactions</text>
+
+  <!-- State Machine -->
+  <rect x="240" y="344" width="130" height="74" rx="8" fill="white" stroke="#4ADE80" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="305" y="366" text-anchor="middle" fill="#14532D" font-size="11" font-weight="700">State Machine</text>
+  <text x="305" y="382" text-anchor="middle" fill="#16A34A" font-size="8.5">pending &#8594; validating</text>
+  <text x="305" y="394" text-anchor="middle" fill="#16A34A" font-size="8.5">&#8594; approved/rejected</text>
+  <text x="305" y="406" text-anchor="middle" fill="#16A34A" font-size="8.5">&#8594; disbursed</text>
+
+  <!-- Country Rules -->
+  <rect x="385" y="344" width="165" height="74" rx="8" fill="white" stroke="#4ADE80" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="468" y="366" text-anchor="middle" fill="#14532D" font-size="11" font-weight="700">Country Rules</text>
+  <text x="468" y="382" text-anchor="middle" fill="#16A34A" font-size="8.5">ES: DNI + 6x income</text>
+  <text x="468" y="394" text-anchor="middle" fill="#16A34A" font-size="8.5">MX: CURP + 4x income</text>
+  <text x="468" y="406" text-anchor="middle" fill="#16A34A" font-size="8.5">CO: CC + 5x debt ratio</text>
+
+  <!-- Banking Providers -->
+  <rect x="565" y="344" width="185" height="74" rx="8" fill="white" stroke="#4ADE80" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="658" y="366" text-anchor="middle" fill="#14532D" font-size="11" font-weight="700">Banking Providers</text>
+  <text x="658" y="382" text-anchor="middle" fill="#16A34A" font-size="8.5">ES: BancoEspanaConnect</text>
+  <text x="658" y="394" text-anchor="middle" fill="#16A34A" font-size="8.5">MX: BuroCreditoMX</text>
+  <text x="658" y="406" text-anchor="middle" fill="#16A34A" font-size="8.5">CO: DataCreditoCO</text>
+
+  <!-- ═══════════════ OBAN WORKERS ═══════════════ -->
+  <rect x="790" y="314" width="380" height="120" rx="10" fill="url(#infraGrad)" stroke="#FDBA74" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="810" y="334" fill="#9A3412" font-size="11" font-weight="700" letter-spacing="1">OBAN ASYNC WORKERS</text>
+
+  <!-- Worker boxes -->
+  <rect x="810" y="344" width="160" height="34" rx="6" fill="white" stroke="#FB923C" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="890" y="358" text-anchor="middle" fill="#9A3412" font-size="10" font-weight="600">RiskAssessmentWorker</text>
+  <text x="890" y="370" text-anchor="middle" fill="#EA580C" font-size="8">Decimal scoring | unique jobs</text>
+
+  <rect x="990" y="344" width="160" height="34" rx="6" fill="white" stroke="#FB923C" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="1070" y="358" text-anchor="middle" fill="#9A3412" font-size="10" font-weight="600">BankInfoWorker</text>
+  <text x="1070" y="370" text-anchor="middle" fill="#EA580C" font-size="8">Fetch bank data | idempotent</text>
+
+  <rect x="810" y="386" width="160" height="34" rx="6" fill="white" stroke="#FB923C" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="890" y="400" text-anchor="middle" fill="#9A3412" font-size="10" font-weight="600">AuditWorker</text>
+  <text x="890" y="412" text-anchor="middle" fill="#EA580C" font-size="8">Audit trail logging</text>
+
+  <rect x="990" y="386" width="160" height="34" rx="6" fill="white" stroke="#FB923C" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="1070" y="400" text-anchor="middle" fill="#9A3412" font-size="10" font-weight="600">WebhookWorker</text>
+  <text x="1070" y="412" text-anchor="middle" fill="#EA580C" font-size="8">HTTP delivery | let it crash</text>
+
+  <!-- ═══════════════ DATA LAYER ═══════════════ -->
+  <rect x="30" y="452" width="1140" height="145" rx="10" fill="url(#dbGrad)" stroke="#F9A8D4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="472" fill="#9D174D" font-size="11" font-weight="700" letter-spacing="1">DATA LAYER (PostgreSQL 16)</text>
+
+  <!-- Tables -->
+  <rect x="60" y="484" width="180" height="98" rx="8" fill="white" stroke="#EC4899" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="150" y="504" text-anchor="middle" fill="#831843" font-size="11" font-weight="700">credit_applications</text>
+  <text x="150" y="520" text-anchor="middle" fill="#BE185D" font-size="8.5">id, country, full_name</text>
+  <text x="150" y="532" text-anchor="middle" fill="#BE185D" font-size="8.5">amount, income, status</text>
+  <text x="150" y="544" text-anchor="middle" fill="#BE185D" font-size="8.5">bank_info, risk_score</text>
+  <text x="150" y="556" text-anchor="middle" fill="#BE185D" font-size="8.5">lock_version (optimistic)</text>
+  <text x="150" y="570" text-anchor="middle" fill="#BE185D" font-size="8.5">7 indexes + CHECK constraints</text>
+
+  <!-- Users table -->
+  <rect x="260" y="484" width="150" height="98" rx="8" fill="white" stroke="#EC4899" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="335" y="504" text-anchor="middle" fill="#831843" font-size="11" font-weight="700">users</text>
+  <text x="335" y="520" text-anchor="middle" fill="#BE185D" font-size="8.5">id (binary_id)</text>
+  <text x="335" y="532" text-anchor="middle" fill="#BE185D" font-size="8.5">email (unique)</text>
+  <text x="335" y="544" text-anchor="middle" fill="#BE185D" font-size="8.5">password_hash (bcrypt)</text>
+  <text x="335" y="556" text-anchor="middle" fill="#BE185D" font-size="8.5">role, country</text>
+  <text x="335" y="570" text-anchor="middle" fill="#BE185D" font-size="8.5">CHECK valid_role</text>
+
+  <!-- Audit logs table -->
+  <rect x="430" y="484" width="150" height="98" rx="8" fill="white" stroke="#EC4899" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="505" y="504" text-anchor="middle" fill="#831843" font-size="11" font-weight="700">audit_logs</text>
+  <text x="505" y="520" text-anchor="middle" fill="#BE185D" font-size="8.5">entity_type, entity_id</text>
+  <text x="505" y="532" text-anchor="middle" fill="#BE185D" font-size="8.5">action</text>
+  <text x="505" y="544" text-anchor="middle" fill="#BE185D" font-size="8.5">changes (JSONB)</text>
+  <text x="505" y="556" text-anchor="middle" fill="#BE185D" font-size="8.5">actor_id (FK)</text>
+
+  <!-- Oban jobs table -->
+  <rect x="600" y="484" width="150" height="98" rx="8" fill="white" stroke="#EC4899" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="675" y="504" text-anchor="middle" fill="#831843" font-size="11" font-weight="700">oban_jobs</text>
+  <text x="675" y="520" text-anchor="middle" fill="#BE185D" font-size="8.5">queue, worker, args</text>
+  <text x="675" y="532" text-anchor="middle" fill="#BE185D" font-size="8.5">state, priority</text>
+  <text x="675" y="544" text-anchor="middle" fill="#BE185D" font-size="8.5">unique constraints</text>
+  <text x="675" y="556" text-anchor="middle" fill="#BE185D" font-size="8.5">scheduled_at</text>
+
+  <!-- PG Triggers -->
+  <rect x="770" y="484" width="190" height="98" rx="8" fill="#FDF4FF" stroke="#D946EF" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <text x="865" y="504" text-anchor="middle" fill="#701A75" font-size="11" font-weight="700">PostgreSQL Triggers</text>
+  <text x="865" y="524" text-anchor="middle" fill="#A21CAF" font-size="8.5">notify_credit_application_changes()</text>
+  <text x="865" y="540" text-anchor="middle" fill="#A21CAF" font-size="8.5">ON INSERT &#8594; pg_notify</text>
+  <text x="865" y="556" text-anchor="middle" fill="#A21CAF" font-size="8.5">ON UPDATE &#8594; pg_notify</text>
+  <text x="865" y="572" text-anchor="middle" fill="#A21CAF" font-size="8.5">Channel: credit_application_changes</text>
+
+  <!-- Repo Listener -->
+  <rect x="980" y="484" width="170" height="98" rx="8" fill="#FDF4FF" stroke="#D946EF" stroke-width="1.5" filter="url(#shadowSm)"/>
+  <text x="1065" y="504" text-anchor="middle" fill="#701A75" font-size="11" font-weight="700">Repo.Listener</text>
+  <text x="1065" y="524" text-anchor="middle" fill="#A21CAF" font-size="8.5">GenServer (LISTEN)</text>
+  <text x="1065" y="540" text-anchor="middle" fill="#A21CAF" font-size="8.5">Receives pg_notify events</text>
+  <text x="1065" y="556" text-anchor="middle" fill="#A21CAF" font-size="8.5">Broadcasts via PubSub</text>
+  <text x="1065" y="572" text-anchor="middle" fill="#A21CAF" font-size="8.5">Enqueues RiskAssessment</text>
+
+  <!-- ═══════════════ INFRASTRUCTURE ═══════════════ -->
+  <rect x="30" y="615" width="1140" height="90" rx="10" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="635" fill="#334155" font-size="11" font-weight="700" letter-spacing="1">INFRASTRUCTURE (KUBERNETES)</text>
+
+  <rect x="60" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="125" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">App Deployment</text>
+  <text x="125" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">2 replicas</text>
+
+  <rect x="210" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="275" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">Worker Deploy</text>
+  <text x="275" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">2 replicas (Oban)</text>
+
+  <rect x="360" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="425" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">PostgreSQL</text>
+  <text x="425" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">StatefulSet + PVC</text>
+
+  <rect x="510" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="575" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">Ingress</text>
+  <text x="575" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">WebSocket support</text>
+
+  <rect x="660" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="725" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">Migration Job</text>
+  <text x="725" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">Pre-deploy hook</text>
+
+  <rect x="810" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="875" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">Docker</text>
+  <text x="875" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">Multi-stage Alpine</text>
+
+  <rect x="960" y="648" width="130" height="44" rx="8" fill="white" stroke="#64748B" stroke-width="1.2" filter="url(#shadowSm)"/>
+  <text x="1025" y="666" text-anchor="middle" fill="#1E293B" font-size="10" font-weight="600">Makefile</text>
+  <text x="1025" y="680" text-anchor="middle" fill="#64748B" font-size="8.5">15 commands</text>
+
+  <!-- ═══════════════ DESIGN PATTERNS BOX ═══════════════ -->
+  <rect x="30" y="722" width="1140" height="82" rx="10" fill="#FAFAFA" stroke="#D1D5DB" stroke-width="1" filter="url(#shadowSm)"/>
+  <text x="50" y="742" fill="#374151" font-size="11" font-weight="700" letter-spacing="1">DESIGN PATTERNS &amp; BEST PRACTICES</text>
+
+  <rect x="60" y="752" width="148" height="38" rx="6" fill="#EEF2FF" stroke="#A5B4FC" stroke-width="1"/>
+  <text x="134" y="768" text-anchor="middle" fill="#3730A3" font-size="9" font-weight="600">Behaviour Pattern</text>
+  <text x="134" y="780" text-anchor="middle" fill="#4F46E5" font-size="8">CountryRule + Provider</text>
+
+  <rect x="220" y="752" width="148" height="38" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+  <text x="294" y="768" text-anchor="middle" fill="#166534" font-size="9" font-weight="600">Ecto.Multi</text>
+  <text x="294" y="780" text-anchor="middle" fill="#16A34A" font-size="8">Atomic transactions</text>
+
+  <rect x="380" y="752" width="148" height="38" rx="6" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1"/>
+  <text x="454" y="768" text-anchor="middle" fill="#9A3412" font-size="9" font-weight="600">Optimistic Locking</text>
+  <text x="454" y="780" text-anchor="middle" fill="#EA580C" font-size="8">lock_version field</text>
+
+  <rect x="540" y="752" width="148" height="38" rx="6" fill="#FDF2F8" stroke="#F9A8D4" stroke-width="1"/>
+  <text x="614" y="768" text-anchor="middle" fill="#9D174D" font-size="9" font-weight="600">Decimal Arithmetic</text>
+  <text x="614" y="780" text-anchor="middle" fill="#DB2777" font-size="8">No floats for money</text>
+
+  <rect x="700" y="752" width="148" height="38" rx="6" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+  <text x="774" y="768" text-anchor="middle" fill="#92400E" font-size="9" font-weight="600">Event-Driven</text>
+  <text x="774" y="780" text-anchor="middle" fill="#B45309" font-size="8">pg_notify + PubSub</text>
+
+  <rect x="860" y="752" width="148" height="38" rx="6" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="934" y="768" text-anchor="middle" fill="#065F46" font-size="9" font-weight="600">Idempotent Workers</text>
+  <text x="934" y="780" text-anchor="middle" fill="#059669" font-size="8">Unique jobs + guards</text>
+
+  <rect x="1020" y="752" width="130" height="38" rx="6" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1"/>
+  <text x="1085" y="768" text-anchor="middle" fill="#5B21B6" font-size="9" font-weight="600">PII Masking</text>
+  <text x="1085" y="780" text-anchor="middle" fill="#7C3AED" font-size="8">API response sanitized</text>
+
+  <!-- ═══════════════ CONNECTION ARROWS ═══════════════ -->
+  <!-- Client to Web Layer -->
+  <line x1="140" y1="148" x2="140" y2="208" stroke="#818CF8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="330" y1="148" x2="430" y2="208" stroke="#818CF8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="520" y1="148" x2="520" y2="208" stroke="#818CF8" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Web Layer to Business Logic -->
+  <line x1="430" y1="282" x2="400" y2="344" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="615" y1="282" x2="500" y2="344" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Business Logic to Workers -->
+  <line x1="750" y1="380" x2="810" y2="360" stroke="#FB923C" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Business Logic to DB -->
+  <line x1="200" y1="434" x2="200" y2="484" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="400" y1="434" x2="500" y2="484" stroke="#EC4899" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Workers to DB (Oban) -->
+  <line x1="900" y1="420" x2="700" y2="484" stroke="#FB923C" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- PG Trigger to Listener -->
+  <line x1="960" y1="533" x2="980" y2="533" stroke="#D946EF" stroke-width="2"/>
+  <polygon points="978,529 986,533 978,537" fill="#D946EF"/>
+
+  <!-- Listener to PubSub -->
+  <path d="M1065,484 L1065,460 Q1065,450 1055,450 L800,450 Q790,450 785,440 L785,282" stroke="#D946EF" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+
+  <!-- Tech badges -->
+  <text x="600" y="860" text-anchor="middle" fill="#94A3B8" font-size="10">Elixir 1.19 | Phoenix 1.8 | PostgreSQL 16 | Oban 2.20 | Guardian 2.x | Cachex 4.x | Tailwind CSS | DaisyUI</text>
+
+  <!-- Version -->
+  <text x="1155" y="890" text-anchor="end" fill="#CBD5E1" font-size="9">v1.0.0</text>
+</svg>
