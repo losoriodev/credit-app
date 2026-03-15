@@ -5,7 +5,7 @@ defmodule CreditApp.Applications.CreditApplication do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
-  @valid_countries ~w(ES MX CO PT IT BR)
+  @valid_countries ~w(ES MX CO PT IT BR AR)
   @valid_statuses ~w(pending validating approved rejected review_required cancelled disbursed)
 
   schema "credit_applications" do

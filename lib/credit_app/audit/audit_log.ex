@@ -19,6 +19,6 @@ defmodule CreditApp.Audit.AuditLog do
   def changeset(log, attrs) do
     log
     |> cast(attrs, [:entity_type, :entity_id, :action, :changes, :actor_id, :metadata])
-    |> validate_required([:entity_type, :entity_id, :action])
+    |> validate_required([:entity_type, :action])
   end
 end

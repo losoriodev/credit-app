@@ -12,9 +12,13 @@ defmodule CreditApp.Application do
       {Phoenix.PubSub, name: CreditApp.PubSub},
       {Oban, Application.fetch_env!(:credit_app, Oban)},
       {Cachex, name: :credit_app_cache},
+      CreditApp.Resilience.CircuitBreaker,
       CreditApp.Repo.Listener,
       CreditAppWeb.Endpoint
     ]
+
+    # Attach telemetry handlers
+    CreditApp.Workers.DeadLetterHandler.attach()
 
     opts = [strategy: :one_for_one, name: CreditApp.Supervisor]
     Supervisor.start_link(children, opts)

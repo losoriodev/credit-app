@@ -192,6 +192,7 @@ defmodule CreditAppWeb.ApplicationLive.Show do
       "ES" -> "EUR"
       "MX" -> "MXN"
       "CO" -> "COP"
+      "AR" -> "ARS"
       _ -> ""
     end
     "#{Decimal.round(amount, 2)} #{symbol}"
@@ -200,6 +201,7 @@ defmodule CreditAppWeb.ApplicationLive.Show do
   defp country_name("ES"), do: "Spain"
   defp country_name("MX"), do: "Mexico"
   defp country_name("CO"), do: "Colombia"
+  defp country_name("AR"), do: "Argentina"
   defp country_name(c), do: c
 
   defp status_color(status) do

@@ -4,7 +4,8 @@ defmodule CreditApp.Countries.Registry do
   @country_modules %{
     "ES" => CreditApp.Countries.ES,
     "MX" => CreditApp.Countries.MX,
-    "CO" => CreditApp.Countries.CO
+    "CO" => CreditApp.Countries.CO,
+    "AR" => CreditApp.Countries.AR
   }
 
   def get_module(country_code) do

@@ -31,6 +31,9 @@ defmodule CreditAppWeb.Api.AuthController do
   def login(conn, %{"email" => email, "password" => password}) do
     case Accounts.authenticate(email, password) do
       {:ok, %{user: user, token: token}} ->
+        CreditApp.Audit.log("api_session", nil, "login_success", %{email: email}, actor_id: user.id,
+          metadata: %{ip: to_string(:inet_parse.ntoa(conn.remote_ip))})
+
         json(conn, %{
           data: %{
             id: user.id,
@@ -41,6 +44,9 @@ defmodule CreditAppWeb.Api.AuthController do
         })
 
       {:error, :invalid_credentials} ->
+        CreditApp.Audit.log("api_session", nil, "login_failure", %{email: email},
+          metadata: %{ip: to_string(:inet_parse.ntoa(conn.remote_ip))})
+
         conn
         |> put_status(:unauthorized)
         |> json(%{error: "Invalid email or password"})

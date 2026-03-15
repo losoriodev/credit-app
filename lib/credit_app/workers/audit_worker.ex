@@ -2,8 +2,15 @@ defmodule CreditApp.Workers.AuditWorker do
   @moduledoc "Async worker for creating audit log entries."
   use Oban.Worker,
     queue: :audit,
-    max_attempts: 3,
+    max_attempts: 5,
     unique: [period: 30, fields: [:args]]
+
+  @impl Oban.Worker
+  def backoff(%Oban.Job{attempt: attempt}) do
+    base = :math.pow(2, attempt) |> trunc()
+    jitter = :rand.uniform(max(base, 1))
+    base + jitter
+  end
 
   require Logger
   alias CreditApp.Audit

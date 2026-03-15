@@ -88,6 +88,7 @@ defmodule CreditAppWeb.ApplicationLive.Index do
           <option value="ES" selected={@country_filter == "ES"}>Spain (ES)</option>
           <option value="MX" selected={@country_filter == "MX"}>Mexico (MX)</option>
           <option value="CO" selected={@country_filter == "CO"}>Colombia (CO)</option>
+          <option value="AR" selected={@country_filter == "AR"}>Argentina (AR)</option>
         </select>
         <select name="status" class="rounded-lg border-gray-300 shadow-sm">
           <option value="">All Statuses</option>
@@ -165,6 +166,7 @@ defmodule CreditAppWeb.ApplicationLive.Index do
         "ES" -> "EUR"
         "MX" -> "MXN"
         "CO" -> "COP"
+        "AR" -> "ARS"
         _ -> ""
       end
 

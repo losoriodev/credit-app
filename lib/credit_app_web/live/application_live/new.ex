@@ -65,6 +65,7 @@ defmodule CreditAppWeb.ApplicationLive.New do
             <option value="ES" selected={@form[:country].value == "ES"}>Spain (ES) - DNI required</option>
             <option value="MX" selected={@form[:country].value == "MX"}>Mexico (MX) - CURP required</option>
             <option value="CO" selected={@form[:country].value == "CO"}>Colombia (CO) - CC required</option>
+            <option value="AR" selected={@form[:country].value == "AR"}>Argentina (AR) - CUIT required</option>
           </select>
           <p :for={msg <- get_errors(@form[:country])} class="mt-1 text-sm text-red-600">{msg}</p>
         </div>
@@ -121,10 +122,12 @@ defmodule CreditAppWeb.ApplicationLive.New do
   defp doc_placeholder("ES"), do: "12345678Z"
   defp doc_placeholder("MX"), do: "BADD110313HCMLNS09"
   defp doc_placeholder("CO"), do: "1234567890"
+  defp doc_placeholder("AR"), do: "20-27395162-3"
   defp doc_placeholder(_), do: "Select a country first"
 
   defp doc_hint("ES"), do: "Spanish DNI: 8 digits + 1 control letter"
   defp doc_hint("MX"), do: "Mexican CURP: 18 alphanumeric characters"
   defp doc_hint("CO"), do: "Colombian CC: 6 to 10 digits"
+  defp doc_hint("AR"), do: "Argentine CUIT/CUIL: 11 digits with check digit"
   defp doc_hint(_), do: ""
 end

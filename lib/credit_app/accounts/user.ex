@@ -22,7 +22,7 @@ defmodule CreditApp.Accounts.User do
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/)
     |> validate_length(:password, min: 6)
     |> validate_inclusion(:role, ["admin", "analyst", "viewer"])
-    |> validate_inclusion(:country, ["ES", "MX", "CO", "PT", "IT", "BR", nil])
+    |> validate_inclusion(:country, ["ES", "MX", "CO", "PT", "IT", "BR", "AR", nil])
     |> unique_constraint(:email)
     |> put_password_hash()
   end

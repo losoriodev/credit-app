@@ -5,8 +5,15 @@ defmodule CreditApp.Workers.RiskAssessmentWorker do
   """
   use Oban.Worker,
     queue: :risk_assessment,
-    max_attempts: 3,
+    max_attempts: 5,
     unique: [period: 60, fields: [:args], keys: [:id]]
+
+  @impl Oban.Worker
+  def backoff(%Oban.Job{attempt: attempt}) do
+    base = :math.pow(2, attempt) |> trunc()
+    jitter = :rand.uniform(max(base, 1))
+    base + jitter
+  end
 
   require Logger
   alias CreditApp.Applications
@@ -19,16 +26,35 @@ defmodule CreditApp.Workers.RiskAssessmentWorker do
     application = Applications.get_application!(id)
 
     with {:ok, country_module} <- Registry.get_module(application.country) do
+      has_bank_info = application.bank_info not in [nil, %{}]
+
       score = calculate_risk_score(application, country_module)
-      Logger.info("[RiskAssessmentWorker] Score for #{id}: #{score}")
+      Logger.info("[RiskAssessmentWorker] Score for #{id}: #{score} (bank_info: #{has_bank_info})")
+
+      :telemetry.execute(
+        [:credit_app, :risk, :score_calculated],
+        %{value: Decimal.to_float(score)},
+        %{country: application.country}
+      )
 
       {:ok, _} = Applications.update_risk_score(id, score)
 
-      new_status = determine_status(country_module, application, score)
+      new_status =
+        if has_bank_info do
+          determine_status(country_module, application, score)
+        else
+          Logger.warning("[RiskAssessmentWorker] No bank info for #{id}, marking as review_required")
+          "review_required"
+        end
 
       case application.status do
         "validating" ->
-          Applications.update_status(id, new_status, notes: "Auto-assessed by risk engine")
+          notes =
+            if has_bank_info,
+              do: "Auto-assessed by risk engine",
+              else: "Auto-assessed without bank info — manual review required"
+
+          Applications.update_status(id, new_status, notes: notes)
 
         _ ->
           Logger.info("[RiskAssessmentWorker] Skipping status update, current: #{application.status}")

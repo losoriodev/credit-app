@@ -79,15 +79,87 @@ defmodule CreditAppWeb.Telemetry do
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
       summary("vm.total_run_queue_lengths.total"),
       summary("vm.total_run_queue_lengths.cpu"),
-      summary("vm.total_run_queue_lengths.io")
+      summary("vm.total_run_queue_lengths.io"),
+
+      # Custom Business Metrics
+      counter("credit_app.application.created.count",
+        tags: [:country],
+        description: "Number of credit applications created"
+      ),
+      counter("credit_app.application.status_changed.count",
+        tags: [:from, :to],
+        description: "Number of status transitions"
+      ),
+      summary("credit_app.risk.score_calculated.value",
+        tags: [:country],
+        description: "Distribution of risk scores by country"
+      ),
+      summary("credit_app.provider.call.duration",
+        tags: [:provider],
+        unit: {:native, :millisecond},
+        description: "Banking provider call duration"
+      ),
+      counter("credit_app.provider.call.error.count",
+        tags: [:provider],
+        description: "Banking provider call errors"
+      ),
+
+      # Oban Job Metrics
+      counter("oban.job.start.count",
+        tags: [:queue, :worker],
+        description: "Oban jobs started"
+      ),
+      counter("oban.job.stop.count",
+        tags: [:queue, :worker],
+        description: "Oban jobs completed"
+      ),
+      counter("oban.job.exception.count",
+        tags: [:queue, :worker],
+        description: "Oban jobs with exceptions"
+      ),
+
+      # Periodic application stats
+      last_value("credit_app.applications.total.count",
+        description: "Total number of applications"
+      ),
+      last_value("credit_app.applications.pending.count",
+        description: "Number of pending applications"
+      ),
+      last_value("credit_app.applications.validating.count",
+        description: "Number of validating applications"
+      )
     ]
   end
 
   defp periodic_measurements do
     [
-      # A module, function and arguments to be invoked periodically.
-      # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {CreditAppWeb, :count_users, []}
+      {__MODULE__, :measure_application_stats, []}
     ]
+  end
+
+  def measure_application_stats do
+    import Ecto.Query
+
+    try do
+      total =
+        CreditApp.Applications.CreditApplication
+        |> CreditApp.Repo.aggregate(:count, :id)
+
+      pending =
+        CreditApp.Applications.CreditApplication
+        |> where([a], a.status == "pending")
+        |> CreditApp.Repo.aggregate(:count, :id)
+
+      validating =
+        CreditApp.Applications.CreditApplication
+        |> where([a], a.status == "validating")
+        |> CreditApp.Repo.aggregate(:count, :id)
+
+      :telemetry.execute([:credit_app, :applications, :total], %{count: total}, %{})
+      :telemetry.execute([:credit_app, :applications, :pending], %{count: pending}, %{})
+      :telemetry.execute([:credit_app, :applications, :validating], %{count: validating}, %{})
+    rescue
+      _ -> :ok
+    end
   end
 end

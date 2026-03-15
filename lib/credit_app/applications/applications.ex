@@ -14,7 +14,7 @@ defmodule CreditApp.Applications do
   def create_application(attrs) do
     country = attrs["country"] || attrs[:country]
 
-    with :ok <- CountryRegistry.validate(country, attrs) do
+    with :ok <- validate_country(country, attrs) do
       changeset = CreditApplication.changeset(%CreditApplication{}, attrs)
 
       Multi.new()
@@ -37,6 +37,11 @@ defmodule CreditApp.Applications do
       |> case do
         {:ok, %{application: application}} ->
           Logger.info("[Applications] Created application #{application.id} for #{country}")
+          :telemetry.execute(
+            [:credit_app, :application, :created],
+            %{count: 1},
+            %{country: country}
+          )
           Cache.invalidate_listing(country)
           {:ok, application}
 
@@ -135,6 +140,11 @@ defmodule CreditApp.Applications do
       |> case do
         {:ok, %{application: updated}} ->
           Logger.info("[Applications] Status updated: #{id} -> #{new_status}")
+          :telemetry.execute(
+            [:credit_app, :application, :status_changed],
+            %{count: 1},
+            %{from: application.status, to: new_status}
+          )
           Cache.invalidate_application(id)
           Cache.invalidate_listing(updated.country)
           broadcast_change(id, updated.country, new_status)
@@ -186,6 +196,19 @@ defmodule CreditApp.Applications do
   end
 
   # --- Private ---
+
+  defp validate_country(country, attrs) do
+    case CountryRegistry.validate(country, attrs) do
+      :ok ->
+        :ok
+
+      {:error, reason} = error ->
+        CreditApp.Audit.log("credit_application", nil, "validation_failed",
+          %{country: country, reason: reason},
+          metadata: %{document: attrs["identity_document"] || attrs[:identity_document]})
+        error
+    end
+  end
 
   defp broadcast_change(id, country, status) do
     payload = {:application_changed, %{id: id, operation: "STATUS_UPDATE", country: country, status: status}}
